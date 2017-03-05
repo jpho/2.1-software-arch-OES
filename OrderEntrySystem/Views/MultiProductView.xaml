@@ -17,7 +17,16 @@
                 <local:SelectedItemsView />
             </Grid>
 
-            <ListView ItemsSource="{Binding Path=AllProducts}" ItemContainerStyle="{StaticResource ResourceKey=ListViewStyle}" ></ListView>
+            <ListView ItemsSource="{Binding Path=AllProducts}" ItemContainerStyle="{StaticResource ResourceKey=ListViewStyle}" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="75" DisplayMemberBinding="{Binding Path=Name}" />
+                        <GridViewColumn Header="Location" Width="75" DisplayMemberBinding="{Binding Path=Location}" />
+                        <GridViewColumn Header="Description" Width="75" DisplayMemberBinding="{Binding Path=Description}" />
+                    </GridView>
+                </ListView.View>
+
+            </ListView>
             </DockPanel>
     </Grid>
 </UserControl>

@@ -132,6 +132,7 @@ namespace OrderEntrySystem
         public void Save()
         {
             this.repositorys.AddCustomer(this.customer);
+            this.repositorys.SaveToDatabase();
         }
 
         public bool IsSelected

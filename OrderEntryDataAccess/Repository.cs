@@ -17,20 +17,16 @@ namespace OrderEntryDataAccess
 
         public event EventHandler<CustomerEventArgs> CustomerAdded;
 
-        private List<Customer> customers = new List<Customer>();
-
-        private List<Product> products = new List<Product>();
-
-        private List<Location> locations = new List<Location>();
 
         public void AddLocation(Location location)
         {
             if (this.ContainsLocation(location) == false)
             {
-                this.locations.Add(location);
+                this.context.Locations.Add(location);
                 if (this.ProductAdded != null)
                 {
-                    this.LocationAdded(location, new LocationEventArgs(location));
+                    // this.LocationAdded(location, new LocationEventArgs(location));
+                    this.context.Locations.Add(location);
                 }
             }
         }
@@ -44,10 +40,12 @@ namespace OrderEntryDataAccess
         {
             if (this.ContainsProduct(product) == false)
             {
-                this.products.Add(product);
+                this.context.Products.Add(product);
+
                 if (this.ProductAdded != null)
                 {
-                    this.ProductAdded(product, new ProductEventArgs(product));
+                    // this.ProductAdded(product, new ProductEventArgs(product));
+                    this.context.Products.Add(product);
                 }
             }
         }
@@ -56,10 +54,13 @@ namespace OrderEntryDataAccess
         {
             if (this.ContainsCustomer(customer) == false)
             {
-                this.customers.Add(customer);
+                this.context.Customers.Add(customer);
+
                 if (this.CustomerAdded != null)
                 {
-                    this.CustomerAdded(customer, new CustomerEventArgs(customer));
+                   // this.CustomerAdded(customer, new CustomerEventArgs(customer));
+
+                    this.context.Customers.Add(customer);
                 }
             }
         }
@@ -82,22 +83,22 @@ namespace OrderEntryDataAccess
 
         public List<Product> GetProducts()
         {
-            return this.products;
+            return this.context.Products.ToList();
         }
 
         public List<Customer> GetCustomers()
         {
-            return this.customers;
+            return this.context.Customers.ToList();
         }
 
         public List<Location> GetLocations()
         {
-            return this.locations;
+            return this.context.Locations.ToList();
         }
 
         public void SaveToDatabase()
         {
-
+            this.context.SaveChanges();
         }
 
         private Product GetProduct(int id)

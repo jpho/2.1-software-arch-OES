@@ -107,6 +107,7 @@ namespace OrderEntrySystem
         public void Save()
         {
             this.repositorys.AddLocation(this.location);
+            this.repositorys.SaveToDatabase();
         }
 
         protected override void CreateCommands()

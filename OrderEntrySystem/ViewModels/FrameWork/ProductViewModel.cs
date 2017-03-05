@@ -99,6 +99,7 @@ namespace OrderEntrySystem
         public void Save()
         {
             this.repositorys.AddProduct(this.product);
+            this.repositorys.SaveToDatabase();
         }
 
 

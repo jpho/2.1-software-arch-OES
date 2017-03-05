@@ -11,12 +11,24 @@
     </UserControl.Resources>
 
     <Grid>
-        <DockPanel Margin="-29,0,0,0">
+        <DockPanel Margin="0,0,0,0">
             <Grid DockPanel.Dock="Bottom">
                 <local:SelectedItemsView />
             </Grid>
 
-            <ListView ItemsSource="{Binding Path=AllCustomers}" ItemContainerStyle="{StaticResource ResourceKey=ListViewStyle}" />
+            <ListView ItemsSource="{Binding Path=AllCustomers}" ItemContainerStyle="{StaticResource ResourceKey=ListViewStyle}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="FirstName" Width="75" DisplayMemberBinding="{Binding Path=FirstName}" />
+                        <GridViewColumn Header="LastName" Width="75" DisplayMemberBinding="{Binding Path=LastName}" />
+                        <GridViewColumn Header="Phone" Width="75" DisplayMemberBinding="{Binding Path=Phone}" />
+                        <GridViewColumn Header="Email" Width="75" DisplayMemberBinding="{Binding Path=Email}" />
+                        <GridViewColumn Header="Address" Width="75" DisplayMemberBinding="{Binding Path=Address}" />
+                        <GridViewColumn Header="City" Width="75" DisplayMemberBinding="{Binding Path=City}" />
+                        <GridViewColumn Header="State" Width="75" DisplayMemberBinding="{Binding Path=State}" />
+                    </GridView>
+            </ListView.View>
+            </ListView>
 
         </DockPanel>
     </Grid>
