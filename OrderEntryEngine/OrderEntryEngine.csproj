@@ -49,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
+    <Compile Include="CategoryEventArgs.cs" />
     <Compile Include="CustomerEventArgs.cs" />
+    <Compile Include="Enumerations\Condition.cs" />
     <Compile Include="LocationEventArgs.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Location.cs" />

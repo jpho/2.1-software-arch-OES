@@ -5,6 +5,8 @@
     <Style x:Key="ListViewStyle" TargetType="{x:Type ListViewItem}">
         <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />
     </Style>
+    
+    
 
     <DataTemplate DataType="{x:Type local:ProductViewModel}">
         <local:ProductView></local:ProductView>
@@ -26,6 +28,14 @@
         <local:MultiLocationView></local:MultiLocationView>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type local:MultiCategoryViewModel}">
+        <local:MultiCategoryView></local:MultiCategoryView>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:CategoryView}">
+        <local:CategoryView></local:CategoryView>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type local:LocationViewModel}">
         <local:LocationView></local:LocationView>
     </DataTemplate>
@@ -39,6 +49,27 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
     </DataTemplate>
+
+
+    <DataTemplate x:Key="HorizontalCommandsTemplate">
+        <ItemsControl ItemsSource="{Binding}" HorizontalAlignment="Right">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding Path=Command}" Content="{Binding Path=DisplayName}" Height="23" Width="75" Margin="4,4,0,0" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DataTemplate>
+
+
+
+
+
 
     <DataTemplate x:Key="WorkspacesTemplate">
         <TabControl IsSynchronizedWithCurrentItem="True" Margin="4" ItemsSource="{Binding}">
@@ -56,13 +87,17 @@
     </DataTemplate>
     <Style x:Key="MainHeaderStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
-            
             <Setter.Value>
                 <DataTemplate>
                     <Border Background="{StaticResource Brush_HeaderBackground}" BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Margin="4" Padding="4" SnapsToDevicePixels="True">
                         <TextBlock FontSize="14" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Text="{TemplateBinding Content}" />
                     </Border>
                 </DataTemplate>
+                
+                
+                
+                
+                
             </Setter.Value>
         </Setter>
         <Setter Property="IsTabStop" Value="False" />
@@ -76,6 +111,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
+
+
+
 
     </Style>
 

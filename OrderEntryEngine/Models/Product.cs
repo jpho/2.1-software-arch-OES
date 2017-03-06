@@ -11,8 +11,18 @@ namespace OrderEntryEngine
     {
         public int Id { get; set; }
 
-        [MaxLength (100)]
-        public string Location { get; set; }
+        public Condition Condition { get; set; }
+
+        public virtual Category Category { get; set; }
+
+        public int CategoryId { get; set; }
+        
+        public virtual Location Location { get; set; }
+
+        public int LocationId { get; set; }
+
+       
+       // public string Location { get; set; }
 
         [Required]
         [MaxLength(100)]

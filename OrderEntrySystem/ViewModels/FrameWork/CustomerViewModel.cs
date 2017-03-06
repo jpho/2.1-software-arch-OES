@@ -148,9 +148,32 @@ namespace OrderEntrySystem
             }
         }
 
+        /// <summary>
+        /// Saves the changes in the window.
+        /// </summary>
+        private void OkExecute()
+        {
+            this.Save();
+            this.CloseAction(true);
+        }
+
+        /// <summary>
+        /// Discards the changes in the window.
+        /// </summary>
+        private void CancelExecute()
+        {
+            this.CloseAction(false);
+
+        }
+
+        /// <summary>
+        /// The create commands associated with the class.
+        /// </summary>
         protected override void CreateCommands()
         {
-            
+            this.Commands.Add(new CommandViewModel("OK", new DelegateCommand(p => this.OkExecute())));
+
+            this.Commands.Add(new CommandViewModel("Cancel", new DelegateCommand(p => this.CancelExecute())));
         }
     }
 }

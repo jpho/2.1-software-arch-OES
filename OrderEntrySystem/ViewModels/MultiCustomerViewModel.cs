@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace OrderEntrySystem
 {
@@ -62,9 +63,65 @@ namespace OrderEntrySystem
             }
         }
 
+        /// <summary>
+        /// Creates a new window to create a new customer.
+        /// </summary>
+        public void CreateNewCustomerExecute()
+        {
+            this.ShowCustomer(new CustomerViewModel(new Customer(), this.repositorys));
+        }
+
+        /// <summary>
+        /// Creates a new window to edit the currently selected customer.
+        /// </summary>
+        public void EditCustomerExecute()
+        {
+            try
+            {
+                CustomerViewModel viewModel = this.AllCustomers.SingleOrDefault(vm => vm.IsSelected);
+
+                if (viewModel != null)
+                {
+                    this.ShowCustomer(viewModel);
+                    this.repositorys.SaveToDatabase();
+                }
+                else if (viewModel == null)
+                {
+                    MessageBox.Show("Please select an item first.");
+                }
+
+
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Select 1 item only.");
+            }
+        }
+
+        /// <summary>
+        /// Shows the currently selected customer in a new window.
+        /// </summary>
+        public void ShowCustomer(CustomerViewModel viewModel)
+        {
+            WorkspaceWindow window = new WorkspaceWindow();
+            window.Width = 400;
+            window.Title = viewModel.DisplayName;
+
+            viewModel.CloseAction = b => window.DialogResult = b;
+
+            CustomerView view = new CustomerView();
+            view.DataContext = viewModel;
+
+            window.Content = view;
+            window.ShowDialog();
+
+        }
+
         protected override void CreateCommands()
         {
+            this.Commands.Add(new CommandViewModel("New...", new DelegateCommand(p => this.CreateNewCustomerExecute())));
 
+            this.Commands.Add(new CommandViewModel("Edit...", new DelegateCommand(p => this.EditCustomerExecute())));
         }
     }
 }

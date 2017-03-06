@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace OrderEntrySystem
 {
@@ -70,9 +71,65 @@ namespace OrderEntrySystem
 
 
 
+        /// <summary>
+        /// Creates a new window to create a new customer.
+        /// </summary>
+        public void CreateNewLocationExecute()
+        {
+            this.ShowLocation(new LocationViewModel(new Location(), this.repositorys));
+        }
+
+        /// <summary>
+        /// Creates a new window to edit the currently selected customer.
+        /// </summary>
+        public void EditLocationExecute()
+        {
+            try
+            {
+                LocationViewModel viewModel = this.AllLocations.SingleOrDefault(vm => vm.IsSelected);
+
+                if (viewModel != null)
+                {
+                    this.ShowLocation(viewModel);
+                    this.repositorys.SaveToDatabase();
+                }
+                else if (viewModel == null)
+                {
+                    MessageBox.Show("Please select an item first.");
+                }
+
+
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("Select 1 item only.");
+            }
+        }
+
+        /// <summary>
+        /// Shows the currently selected customer in a new window.
+        /// </summary>
+        public void ShowLocation(LocationViewModel viewModel)
+        {
+            WorkspaceWindow window = new WorkspaceWindow();
+            window.Width = 400;
+            window.Title = viewModel.DisplayName;
+
+            viewModel.CloseAction = b => window.DialogResult = b;
+
+            LocationView view = new LocationView();
+            view.DataContext = viewModel;
+
+            window.Content = view;
+            window.ShowDialog();
+
+        }
+
         protected override void CreateCommands()
         {
+            this.Commands.Add(new CommandViewModel("New...", new DelegateCommand(p => this.CreateNewLocationExecute())));
 
+            this.Commands.Add(new CommandViewModel("Edit...", new DelegateCommand(p => this.EditLocationExecute())));
         }
     }
 }

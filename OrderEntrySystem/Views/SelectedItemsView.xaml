@@ -12,9 +12,14 @@
 
     <Grid>
 
+        <StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="Number of items selected: " />
             <ContentPresenter Content="{Binding Path=NumberOfItemsSelected}" />
+        </StackPanel>
+            <ContentControl Content="{Binding Path=Commands}" ContentTemplate="{StaticResource HorizontalCommandsTemplate}">
+                
+            </ContentControl>
         </StackPanel>
 
 

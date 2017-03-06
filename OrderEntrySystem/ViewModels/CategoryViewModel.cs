@@ -9,24 +9,45 @@ using System.Windows.Input;
 
 namespace OrderEntrySystem
 {
-    public class LocationViewModel : WorkspaceViewModel
+    public class CategoryViewModel : WorkspaceViewModel
     {
+        public MultiCategoryViewModel AllCategories;
+
         private ICommand saveCommand;
 
         private bool isSelected;
 
         private Repository repositorys;
 
-        private Location location;
+        private Category category;
 
-        public LocationViewModel(Location location, Repository repository)
-            : base("Location")
+        public CategoryViewModel(Category category, Repository repository)
+            : base("Category")
         {
-            this.location = location;
+            this.category = category;
             this.repositorys = repository;
 
         }
 
+        /// <summary>
+        /// Gets or sets the Id of the category.
+        /// </summary>
+        public int Id
+        {
+            get
+            {
+                return this.category.Id;
+            }
+            set
+            {
+                this.category.Id = value;
+                this.OnPropertyChanged("Id");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the value indicating if the category is selected or not.
+        /// </summary>
         public bool IsSelected
         {
             get
@@ -40,57 +61,38 @@ namespace OrderEntrySystem
             }
         }
 
+        /// <summary>
+        /// Gets and sets the categories name.
+        /// </summary>
         public string Name
         {
             get
             {
-                return this.location.Name;
+                return this.category.Name;
             }
             set
             {
-                this.location.Name = value;
+                this.category.Name = value;
                 this.OnPropertyChanged("Name");
             }
         }
 
-        public string Description
+        /// <summary>
+        /// Gets or sets the categories list of products.
+        /// </summary>
+        public virtual ICollection<Product> Products
         {
             get
             {
-                return this.location.Description;
+                return this.category.Products;
             }
             set
             {
-                this.location.Description = value;
-                this.OnPropertyChanged("Description");
+                this.category.Products = value;
+                this.OnPropertyChanged("Products");
             }
         }
-
-        public string City
-        {
-            get
-            {
-                return this.location.City;
-            }
-            set
-            {
-                this.location.City = value;
-                this.OnPropertyChanged("City");
-            }
-        }
-
-        public string State
-        {
-            get
-            {
-                return this.location.State;
-            }
-            set
-            {
-                this.location.State = value;
-                this.OnPropertyChanged("State");
-            }
-        }
+        
 
         public ICommand SaveCommand
         {
@@ -106,7 +108,7 @@ namespace OrderEntrySystem
 
         public void Save()
         {
-            this.repositorys.AddLocation(this.location);
+            this.repositorys.AddCategories(this.category);
             this.repositorys.SaveToDatabase();
         }
 
