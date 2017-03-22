@@ -59,6 +59,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Order.cs" />
+    <Compile Include="OrderEventArgs.cs" />
     <Compile Include="ProductEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -48,12 +48,22 @@ namespace OrderEntryDataAccess
 
             var customers = new List<Customer>
                     {
-                        new Customer { FirstName = "Nancy" },
-                        new Customer { FirstName = "Joseph" },
-                        new Customer { FirstName = "Dia" }
+                        new Customer { FirstName = "Nancy" , LastName = "Lee",  Id = 1},
+                        new Customer { FirstName = "Joseph", LastName = "Yang", Id = 2 },
+                        new Customer { FirstName = "Dia" , LastName = "Frampton", Id = 3}
                     };
 
             context.Customers.AddRange(customers);
+            context.SaveChanges();
+
+            var orders = new List<Order>
+            {
+                new Order { Id = 1, CustomerId = 3, Status = OrderStatus.Shipped },
+                new Order {  Id = 2, CustomerId = 2, Status = OrderStatus.Placed},
+                new Order { Id = 3, CustomerId = 1, Status = OrderStatus.Pending }
+            };
+
+            context.Orders.AddRange(orders);
             context.SaveChanges();
 
             

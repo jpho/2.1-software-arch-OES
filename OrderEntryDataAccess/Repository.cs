@@ -19,6 +19,7 @@ namespace OrderEntryDataAccess
 
         public event EventHandler<CategoryEventArgs> CategoryAdded;
 
+        public event EventHandler<OrderEventArgs> OrderAdded;
 
         public void AddLocation(Location location)
         {
@@ -92,6 +93,41 @@ namespace OrderEntryDataAccess
                 }
             }
         }
+
+        /// <summary>
+        /// Add order
+        /// </summary>
+        /// <param name="order"></param>
+        public void AddOrder(Order order)
+        {
+            if (this.ContainsOrder(order) == false)
+            {
+                this.context.Orders.Add(order);
+
+                if (this.OrderAdded != null)
+                {
+                    this.context.Orders.Add(order);
+                }
+            }
+        }
+
+        public bool ContainsOrder(Order order)
+        {
+            return this.GetOrder(order.Id) != null;
+        }
+
+        private Order GetOrder(int id)
+        {
+            return this.context.Orders.Find(id);
+        }
+
+        public List<Order> GetOrders()
+        {
+            return this.context.Orders.ToList();
+        }
+        
+
+       
 
         public bool ContainsCategory(Category category)
         {

@@ -169,6 +169,21 @@ namespace OrderEntrySystem
             this.ActivateViewModel(viewModel);
         }
 
+        public void ShowAllOrders()
+        {
+            MultiOrderViewModel viewModel = this.ViewModels.FirstOrDefault(vm => vm is MultiOrderViewModel) as MultiOrderViewModel;
+
+            if (viewModel == null)
+            {
+                viewModel = new MultiOrderViewModel(repositorys);
+                viewModel.RequestClose += this.OnWorkspaceRequestClose;
+                this.ViewModels.Add(viewModel);
+
+            }
+
+            this.ActivateViewModel(viewModel);
+        }
+
         protected override void CreateCommands()
         {
 
@@ -181,6 +196,8 @@ namespace OrderEntrySystem
            this.Commands.Add(new CommandViewModel("View all location", new DelegateCommand(p => this.ShowAllLocations())));
 
             this.Commands.Add(new CommandViewModel("View all Categories", new DelegateCommand(p => this.ShowAllCategories())));
+
+            this.Commands.Add(new CommandViewModel("View all Orders", new DelegateCommand(p => this.ShowAllOrders())));
 
 
         }

@@ -26,6 +26,7 @@ namespace OrderEntryEngine
 
         public string State { get; set; }
 
+        // navigation...sql???
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

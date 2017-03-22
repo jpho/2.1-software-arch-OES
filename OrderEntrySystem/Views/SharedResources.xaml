@@ -5,8 +5,10 @@
     <Style x:Key="ListViewStyle" TargetType="{x:Type ListViewItem}">
         <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />
     </Style>
-    
-    
+
+    <DataTemplate DataType="{x:Type local:OrderViewModel}">
+        <local:OrderView></local:OrderView>
+    </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:ProductViewModel}">
         <local:ProductView></local:ProductView>
@@ -30,6 +32,10 @@
 
     <DataTemplate DataType="{x:Type local:MultiCategoryViewModel}">
         <local:MultiCategoryView></local:MultiCategoryView>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type local:MultiOrderViewModel}">
+        <local:MultiOrderView></local:MultiOrderView>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type local:CategoryView}">
