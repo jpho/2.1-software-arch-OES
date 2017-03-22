@@ -22,18 +22,30 @@ namespace OrderEntrySystem
 
         public ICommand saveCommand;
 
-
-        public ProductViewModel(Product product, Repository repository)
-            : base("Product")
-            
+        public virtual Category Category
         {
-            this.product = product;
-            this.repositorys = repository;
-            
+            get
+            {
+                return this.product.Category;
+            }
+            set
+            {
+                this.product.Category = value;
+                this.OnPropertyChanged("Category");
+            }
         }
 
-        public string Location
+        public IEnumerable<Category> Categories
         {
+            get
+            {
+                return this.repositorys.GetCategories();
+            }
+        }
+
+
+
+        public virtual Location Location {
             get
             {
                 return this.product.Location;
@@ -45,6 +57,49 @@ namespace OrderEntrySystem
             }
         }
 
+        public IEnumerable<Location> Locations
+        {
+            get
+            {
+                return this.repositorys.GetLocations();
+            }
+        }
+
+
+        public ProductViewModel(Product product, Repository repository)
+            : base("Product")
+            
+        {
+            this.product = product;
+            this.repositorys = repository;
+            
+        }
+
+       
+        public Condition Condition
+        {
+            get
+            {
+                return this.product.Condition;
+            }
+            set
+            {
+                this.product.Condition = value;
+                this.OnPropertyChanged("Condition");
+            }
+        }
+
+        public IEnumerable<Condition> Conditions
+        {
+           get
+            {
+                return Enum.GetValues(typeof(Condition)) as IEnumerable<Condition>;
+            }
+        }
+
+       /// <summary>
+       /// The name of the product.
+       /// </summary>
         public string Name
         {
             get
@@ -103,11 +158,7 @@ namespace OrderEntrySystem
         }
 
 
-        protected override void CreateCommands()
-        {
-            ////throw new Exception("Didn't do this part yet.");
-        }
-
+       
         public bool IsSelected
         {
             get
@@ -120,6 +171,35 @@ namespace OrderEntrySystem
                 this.OnPropertyChanged("IsSelected");
             }
         }
+
+        /// <summary>
+        /// Saves the changes in the window.
+        /// </summary>
+        private void OkExecute()
+        {
+            this.Save();
+            this.CloseAction(true);
+        }
+
+        /// <summary>
+        /// Discards the changes in the window.
+        /// </summary>
+        private void CancelExecute()
+        {
+            this.CloseAction(false);
+
+        }
+
+        /// <summary>
+        /// The create commands associated with the class.
+        /// </summary>
+        protected override void CreateCommands()
+        {
+            this.Commands.Add(new CommandViewModel("OK", new DelegateCommand(p => this.OkExecute())));
+
+            this.Commands.Add(new CommandViewModel("Cancel", new DelegateCommand(p => this.CancelExecute())));
+        }
+
 
 
     }

@@ -16,7 +16,14 @@ namespace OrderEntryEngine
 
         public string City { get; set; }
 
-        public string State { get; set; }   
+        public string State { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
 
         protected void CreateCommands()
         {

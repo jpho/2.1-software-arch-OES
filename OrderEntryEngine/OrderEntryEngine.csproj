@@ -49,11 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
+    <Compile Include="CategoryEventArgs.cs" />
     <Compile Include="CustomerEventArgs.cs" />
+    <Compile Include="Enumerations\Condition.cs" />
+    <Compile Include="Enumerations\OrderStatus.cs" />
     <Compile Include="LocationEventArgs.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="ProductEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

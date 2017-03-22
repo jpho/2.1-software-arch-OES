@@ -25,5 +25,7 @@ namespace OrderEntryEngine
         public string City { get; set; }
 
         public string State { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

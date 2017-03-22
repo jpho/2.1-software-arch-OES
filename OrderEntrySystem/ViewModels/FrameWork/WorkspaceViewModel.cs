@@ -23,10 +23,12 @@ namespace OrderEntrySystem
 
         public event EventHandler RequestClose;
 
-        ////public EventHandler RequestClose(object sender, EventArgs e)
-        ////{
-        ////    throw new Exception("I guess we closed the event?");
-        ////}
+        
+
+        /// <summary>
+        /// Gets or sets the close action values.
+        /// </summary>
+        public Action<bool> CloseAction { get; set; } 
 
         public ICommand CloseCommand
         {

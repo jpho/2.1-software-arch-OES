@@ -6,8 +6,14 @@
              xmlns:local="clr-namespace:OrderEntrySystem"
              mc:Ignorable="d" 
              d:DesignHeight="336" d:DesignWidth="303">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="SharedResources.xaml" />
+    </UserControl.Resources>
+
+
     <Grid>
-        <Button Content="Save" Command="{Binding Path=SaveCommand}" Margin="119,187,29,-207" Grid.Row="13" Grid.Column="2"/>
+
 
 
         <Label Content="First Name:" Height="Auto" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,0,81,0"/>
@@ -34,7 +40,7 @@
         <Label Content="State:" Height="Auto" Grid.Row="15" Margin="0,142,77,-168" Grid.Column="2"/>
         <TextBox Text="{Binding Path=State, UpdateSourceTrigger=PropertyChanged}" Height="Auto" Grid.Column="2"  Grid.Row="15" Margin="73,149,10,-168"  />
 
-
+        <ContentControl Content="{Binding Path=Commands}" ContentTemplate="{StaticResource ResourceKey=HorizontalCommandsTemplate}" Margin="73,188,4,-210" Grid.Row="15" Grid.Column="2" Grid.RowSpan="1"/>
 
 
         <Grid.ColumnDefinitions>

@@ -17,13 +17,15 @@ namespace OrderEntryDataAccess
 
         public event EventHandler<CustomerEventArgs> CustomerAdded;
 
+        public event EventHandler<CategoryEventArgs> CategoryAdded;
+
 
         public void AddLocation(Location location)
         {
             if (this.ContainsLocation(location) == false)
             {
                 this.context.Locations.Add(location);
-                if (this.ProductAdded != null)
+                if (this.LocationAdded != null)
                 {
                     // this.LocationAdded(location, new LocationEventArgs(location));
                     this.context.Locations.Add(location);
@@ -76,10 +78,35 @@ namespace OrderEntryDataAccess
 
         }
 
-        ////public Repository()
-        ////{
-                                
-        ////}
+       public void AddCategories(Category category)
+        {
+            if (this.ContainsCategory(category) == false)
+            {
+                this.context.Categories.Add(category);
+
+                if (this.CategoryAdded != null)
+                {
+                    // this.CustomerAdded(customer, new CustomerEventArgs(customer));
+
+                    this.context.Categories.Add(category);
+                }
+            }
+        }
+
+        public bool ContainsCategory(Category category)
+        {
+            return this.GetCategory(category.Id) != null;
+        }
+
+        private Category GetCategory(int id)
+        {
+            return this.context.Categories.Find(id);
+        }
+
+        public List<Category> GetCategories()
+        {
+            return this.context.Categories.ToList();
+        }
 
         public List<Product> GetProducts()
         {

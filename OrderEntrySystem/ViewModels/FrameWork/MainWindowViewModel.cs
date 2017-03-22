@@ -43,7 +43,7 @@ namespace OrderEntrySystem
 
         public void CreateNewProduct()
         {
-            Product product = new Product { Location = "Main Warehouse" };
+            Product product = new Product { LocationId = 1 };
 
             ProductViewModel productView = new ProductViewModel(product, repositorys);
 
@@ -96,6 +96,8 @@ namespace OrderEntrySystem
 
             this.ActivateViewModel(viewModel);
         }
+
+      
 
         private void Test_RequestClose(object sender, EventArgs e)
         {
@@ -152,20 +154,34 @@ namespace OrderEntrySystem
             this.ActivateViewModel(viewModel);
         }
 
+        public void ShowAllCategories()
+        {
+            MultiCategoryViewModel viewModel = this.ViewModels.FirstOrDefault(vm => vm is MultiCategoryViewModel) as MultiCategoryViewModel;
+
+            if (viewModel == null)
+            {
+                viewModel = new MultiCategoryViewModel(repositorys);
+                viewModel.RequestClose += this.OnWorkspaceRequestClose;
+                this.ViewModels.Add(viewModel);
+
+            }
+
+            this.ActivateViewModel(viewModel);
+        }
+
         protected override void CreateCommands()
         {
 
-            this.Commands.Add(new CommandViewModel("New product", new DelegateCommand(p => this.CreateNewProduct())));
-
-            this.Commands.Add(new CommandViewModel("New customer", new DelegateCommand(p => this.CreateNewCustomer())));
+          
 
             this.Commands.Add(new CommandViewModel("View All Products", new DelegateCommand(p => this.ShowAllProducts())));
 
             this.Commands.Add(new CommandViewModel("View All Customers", new DelegateCommand(p => this.ShowAllCustomers())));
 
-            this.Commands.Add(new CommandViewModel("New location", new DelegateCommand(p => this.CreateNewLocation())));
+           this.Commands.Add(new CommandViewModel("View all location", new DelegateCommand(p => this.ShowAllLocations())));
 
-            this.Commands.Add(new CommandViewModel("View all location", new DelegateCommand(p => this.ShowAllLocations())));
+            this.Commands.Add(new CommandViewModel("View all Categories", new DelegateCommand(p => this.ShowAllCategories())));
+
 
         }
 

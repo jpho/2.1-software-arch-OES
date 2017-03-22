@@ -22,5 +22,7 @@ namespace OrderEntryDataAccess
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Location> Locations { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }
