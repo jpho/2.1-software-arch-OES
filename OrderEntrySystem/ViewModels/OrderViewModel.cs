@@ -2,6 +2,7 @@
 using OrderEntryEngine;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,13 +17,20 @@ namespace OrderEntrySystem
 
         private bool isSelected;
 
+        private MultiOrderLineViewModel filteredLineViewModel;
+
         public OrderViewModel(Order order, Repository repository)
             : base("Order")
         {
             this.order = order;
             this.repositorys = repository;
+            this.order.Lines = new List<OrderLine>();
 
-           // this.order.CustomerId = 1;
+            this.filteredLineViewModel = new MultiOrderLineViewModel(this.repositorys, this.order);
+            this.filteredLineViewModel.AllOrderLines = this.FilteredLines;
+
+
+            // this.order.CustomerId = 1;
         }
 
         public bool IsSelected
@@ -74,6 +82,31 @@ namespace OrderEntrySystem
             }
         }
 
+        public MultiOrderLineViewModel FilteredLineViewModel
+        {
+
+            get
+            {
+                return this.filteredLineViewModel;
+            }
+        }
+
+        public ObservableCollection<OrderLineViewModel> FilteredLines
+        {
+            get
+            {
+                var orderLines =
+                     (from ol in this.order.Lines
+                      select new OrderLineViewModel(ol, this.repositorys)).ToList();
+
+                this.FilteredLineViewModel.AddPropertyChangedEvent(orderLines);
+
+                return new ObservableCollection<OrderLineViewModel>(orderLines);
+            }
+
+            
+
+        }
        
 
         private void Save()

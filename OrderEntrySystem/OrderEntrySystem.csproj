@@ -76,8 +76,10 @@
     <Compile Include="ViewModels\MultiCategoryViewModel.cs" />
     <Compile Include="ViewModels\MultiCustomerViewModel.cs" />
     <Compile Include="ViewModels\MultiLocationViewModel.cs" />
+    <Compile Include="ViewModels\MultiOrderLineView.cs" />
     <Compile Include="ViewModels\MultiOrderViewModel.cs" />
     <Compile Include="ViewModels\MultiProductViewModel.cs" />
+    <Compile Include="ViewModels\OrderLineViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="Views\CategoryView.xaml.cs">
       <DependentUpon>CategoryView.xaml</DependentUpon>
@@ -100,11 +102,17 @@
     <Compile Include="Views\MultiLocationView.xaml.cs">
       <DependentUpon>MultiLocationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MultiOrderLineView.xaml.cs">
+      <DependentUpon>MultiOrderLineView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MultiOrderView.xaml.cs">
       <DependentUpon>MultiOrderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MultiProductView.xaml.cs">
       <DependentUpon>MultiProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrderLineView.xaml.cs">
+      <DependentUpon>OrderLineView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrderView.xaml.cs">
       <DependentUpon>OrderView.xaml</DependentUpon>
@@ -150,11 +158,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MultiOrderLineView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MultiOrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MultiProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrderLineView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

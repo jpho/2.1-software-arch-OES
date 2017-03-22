@@ -15,10 +15,17 @@ namespace OrderEntrySystem
     {
         private Repository repositorys;
 
-        public MultiOrderViewModel(Repository repository)
+        private Customer customer;
+
+        public MultiOrderViewModel(Repository repository, Customer customer)
             : base("Multi Order")
         {
             this.repositorys = repository;
+
+            this.customer = customer;
+
+            this.Commands.Clear();
+            this.CreateCommands();
 
             this.AllOrders = new ObservableCollection<OrderViewModel>();
 
@@ -30,11 +37,15 @@ namespace OrderEntrySystem
             // linq
             List<OrderViewModel> ordersList =
     (from o in this.repositorys.GetOrders() select new OrderViewModel(o, this.repositorys)).ToList();
-
-            ordersList.ForEach(ovm => ovm.PropertyChanged += this.OnOrderViewModelPropertyChanged);
+            this.AddPropertyChangedEvent(ordersList);
 
             // delegate
             this.repositorys.OrderAdded += this.OnOrderAdded;
+        }
+
+        public void AddPropertyChangedEvent(List<OrderViewModel> ordersList)
+        {
+            ordersList.ForEach(ovm => ovm.PropertyChanged += this.OnOrderViewModelPropertyChanged);
         }
 
         /// <summary>
@@ -74,7 +85,9 @@ namespace OrderEntrySystem
 
         private void CreateNewOrderExecute()
         {
-            this.ShowOrder(new OrderViewModel(new Order(), this.repositorys));
+            Order order = new Order();
+            order.Customer = customer;
+            this.ShowOrder(new OrderViewModel(order, this.repositorys));
         }
 
         private void EditOrderExecute()
@@ -118,9 +131,12 @@ namespace OrderEntrySystem
 
         protected override void CreateCommands()
         {
-           // this.Commands.Add(new CommandViewModel("New...", new DelegateCommand(p => this.CreateNewOrderExecute())));
+            if (this.customer != null)
+            {
+                this.Commands.Add(new CommandViewModel("New...", new DelegateCommand(p => this.CreateNewOrderExecute())));
 
-            this.Commands.Add(new CommandViewModel("Edit...", new DelegateCommand(p => this.EditOrderExecute())));
+                this.Commands.Add(new CommandViewModel("Edit...", new DelegateCommand(p => this.EditOrderExecute())));
+            }
         }
     }
 }

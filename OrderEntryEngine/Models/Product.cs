@@ -21,6 +21,8 @@ namespace OrderEntryEngine
 
         public int LocationId { get; set; }
 
+        public virtual ICollection<OrderLine> Orders { get; set; }
+
        
        // public string Location { get; set; }
 

@@ -20,9 +20,8 @@
         </Border>
 
         <Border Grid.Column="2">
-            
-            <HeaderedContentControl Header="Workspaces" Content="{Binding Path=ViewModels}" ContentTemplate="{StaticResource WorkspacesTemplate}" Style="{StaticResource MainHeaderStyle}">
 
+            <HeaderedContentControl Header="Workspaces" Content="{Binding Path=ViewModels}" ContentTemplate="{StaticResource WorkspacesTemplate}" Style="{StaticResource MainHeaderStyle}">
             </HeaderedContentControl>
         </Border>
 

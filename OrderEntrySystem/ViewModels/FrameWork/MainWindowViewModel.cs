@@ -175,7 +175,7 @@ namespace OrderEntrySystem
 
             if (viewModel == null)
             {
-                viewModel = new MultiOrderViewModel(repositorys);
+                viewModel = new MultiOrderViewModel(repositorys, null);
                 viewModel.RequestClose += this.OnWorkspaceRequestClose;
                 this.ViewModels.Add(viewModel);
 

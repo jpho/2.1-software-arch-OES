@@ -105,7 +105,7 @@ namespace OrderEntrySystem
         {
             WorkspaceWindow window = new WorkspaceWindow();
             window.Width = 400;
-            window.Height = 367;
+            window.Height = 750;
             window.Title = viewModel.DisplayName;
 
             viewModel.CloseAction = b => window.DialogResult = b;

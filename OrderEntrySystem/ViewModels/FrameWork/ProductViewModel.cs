@@ -22,6 +22,8 @@ namespace OrderEntrySystem
 
         public ICommand saveCommand;
 
+
+        
         public virtual Category Category
         {
             get

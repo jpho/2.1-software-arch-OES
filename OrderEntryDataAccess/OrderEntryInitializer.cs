@@ -8,7 +8,7 @@ using OrderEntryEngine;
 
 namespace OrderEntryDataAccess
 {
-    public class OrderEntryInitializer : // DropCreateDatabaseAlways<OrderEntryContext>
+    public class OrderEntryInitializer :  // DropCreateDatabaseAlways<OrderEntryContext>
          DropCreateDatabaseIfModelChanges<OrderEntryContext>
     {
         protected override void Seed(OrderEntryContext context)

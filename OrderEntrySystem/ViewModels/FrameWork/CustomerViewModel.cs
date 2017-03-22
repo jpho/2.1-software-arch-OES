@@ -2,6 +2,7 @@
 using OrderEntryEngine;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +20,15 @@ namespace OrderEntrySystem
 
         private ICommand saveCommand;
 
+        private MultiOrderViewModel filteredOrderViewModel;
+
         public CustomerViewModel(Customer customer, Repository repository)
             : base("Customer")
         {
             this.customer = customer;
             this.repositorys = repository;
+            this.filteredOrderViewModel = new MultiOrderViewModel(this.repositorys, customer);
+            this.filteredOrderViewModel.AllOrders = FilteredOrders;
         }
 
         public string FirstName
@@ -147,6 +152,31 @@ namespace OrderEntrySystem
                 this.OnPropertyChanged("IsSelected");
             }
         }
+
+        public MultiOrderViewModel FilteredOrderViewModel
+        {
+            get
+                {
+                    return this.filteredOrderViewModel;
+                }
+        }
+
+        public ObservableCollection<OrderViewModel> FilteredOrders
+        {
+            get
+            {
+                var orders =
+                    (from o in this.repositorys.GetOrders()
+                     where this.customer.Id == o.Id
+                     select new OrderViewModel(o, this.repositorys)).ToList();
+
+                this.FilteredOrderViewModel.AddPropertyChangedEvent(orders);
+
+                return new ObservableCollection<OrderViewModel>(orders);
+            }
+        }
+
+
 
         /// <summary>
         /// Saves the changes in the window.

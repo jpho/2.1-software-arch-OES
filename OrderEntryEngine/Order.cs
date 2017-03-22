@@ -30,5 +30,7 @@ namespace OrderEntryEngine
         /// Gets or sets the orders status.
         /// </summary>
         public OrderStatus Status { get; set; }
+
+        public virtual ICollection<OrderLine> Lines { get; set; }
     }
 }

@@ -10,10 +10,12 @@
         <ResourceDictionary Source="SharedResources.xaml" />
     </UserControl.Resources>
     <Grid>
-        <Label Content="Order Status:" Height="Auto" Grid.Row="13" Margin="10,41,67,-67" Grid.Column="2"/>
-        <ComboBox ItemsSource="{Binding Path=OrderStatuses, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Status}" Grid.Row="13" Grid.Column="2" Margin="0,86,0,-108"></ComboBox>
+        <Label Content="Order Status:" Height="Auto" Grid.Row="13" Margin="6,10,71,-36" Grid.Column="2"/>
+        <ComboBox ItemsSource="{Binding Path=OrderStatuses, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=Status}" Grid.Row="13" Grid.Column="2" Margin="0,77,0,-64"></ComboBox>
 
-        <ContentControl Content="{Binding Path=Commands}" ContentTemplate="{StaticResource ResourceKey=HorizontalCommandsTemplate}" Margin="77,182,0,-204" Grid.Row="13" Grid.Column="2"/>
+        <ContentControl Content="{Binding Path=Commands}" ContentTemplate="{StaticResource ResourceKey=HorizontalCommandsTemplate}" Margin="67,224,10,-217" Grid.Row="13" Grid.Column="2"/>
+
+        <local:MultiOrderLineView Grid.Row="13" DataContext="{Binding Path=FilteredLineViewModel}" Margin="0,128,6,-183" Grid.Column="2" />
 
 
         <Grid.ColumnDefinitions>

@@ -21,6 +21,36 @@ namespace OrderEntryDataAccess
 
         public event EventHandler<OrderEventArgs> OrderAdded;
 
+        public event EventHandler<OrderLineEventArgs> OrderLineAdded;
+
+        public void AddOrderLine(OrderLine line)
+        {
+            if (!this.ContainsOrderLine(line))
+            {
+                this.context.OrderLines.Add(line);
+
+                if (this.OrderLineAdded != null)
+                {
+                    this.OrderLineAdded(this, new OrderLineEventArgs(line));
+                }
+            }
+        }
+
+        public List<OrderLine> GetOrderLines()
+        {
+            return this.context.OrderLines.ToList();
+        }
+
+        private bool ContainsOrderLine(OrderLine line)
+        {
+            return this.GetOrderLine(line.Id) != null;
+        }
+
+        private OrderLine GetOrderLine(int id)
+        {
+            return this.context.OrderLines.Find(id);
+        }
+
         public void AddLocation(Location location)
         {
             if (this.ContainsLocation(location) == false)
